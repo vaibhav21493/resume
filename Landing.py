@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 from Mainportfolio import main_portfolio
+import time
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -8,10 +9,6 @@ st.set_page_config(
     page_icon="✨",
     layout="wide"
 )
-
-# --- Auto-refresh every 1 second to update the time ---
-st_autorefresh = st.experimental_rerun if hasattr(st, 'experimental_rerun') else st.empty
-st_autorefresh = st.autorefresh(interval=1000, key="time_refresh")  # 1000 ms = 1 sec
 
 # --- Check if portfolio page should be shown ---
 if "show_portfolio" not in st.session_state:
@@ -157,9 +154,12 @@ st.markdown(
 )
 st.session_state.count = idx
 
-# --- WELCOME TEXT with auto-updating time ---
+# --- TIME PLACEHOLDER ---
+time_placeholder = st.empty()
+
+# --- WELCOME TEXT (UPDATED EVERY SECOND) ---
 current_time = datetime.now().strftime("%I:%M:%S %p")
-st.markdown(f"<div class='header-text'>Welcome, Vaibhav — {current_time}</div>", unsafe_allow_html=True)
+time_placeholder.markdown(f"<div class='header-text'>Welcome, Vaibhav — {current_time}</div>", unsafe_allow_html=True)
 
 # --- PROFILE + CARD ---
 st.markdown('<div class="container">', unsafe_allow_html=True)
@@ -177,3 +177,7 @@ if st.button("🚀 Explore My Portfolio"):
     st.experimental_rerun()
 
 st.markdown('</div>', unsafe_allow_html=True)
+
+# --- Wait and rerun for dynamic clock ---
+time.sleep(1)
+st.experimental_rerun()
