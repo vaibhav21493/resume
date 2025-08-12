@@ -9,6 +9,10 @@ st.set_page_config(
     layout="wide"
 )
 
+# --- Auto-refresh every 1 second to update the time ---
+st_autorefresh = st.experimental_rerun if hasattr(st, 'experimental_rerun') else st.empty
+st_autorefresh = st.autorefresh(interval=1000, key="time_refresh")  # 1000 ms = 1 sec
+
 # --- Check if portfolio page should be shown ---
 if "show_portfolio" not in st.session_state:
     st.session_state.show_portfolio = False
@@ -153,8 +157,8 @@ st.markdown(
 )
 st.session_state.count = idx
 
-# --- WELCOME TEXT ---
-current_time = datetime.now().strftime("%I:%M %p")
+# --- WELCOME TEXT with auto-updating time ---
+current_time = datetime.now().strftime("%I:%M:%S %p")
 st.markdown(f"<div class='header-text'>Welcome, Vaibhav — {current_time}</div>", unsafe_allow_html=True)
 
 # --- PROFILE + CARD ---
@@ -170,6 +174,6 @@ st.markdown('<div class="subtitle">B.Tech in Cyber Physical Systems | MIT Manipa
 # --- Button instead of link ---
 if st.button("🚀 Explore My Portfolio"):
     st.session_state.show_portfolio = True
-    st.rerun()
+    st.experimental_rerun()
 
 st.markdown('</div>', unsafe_allow_html=True)
