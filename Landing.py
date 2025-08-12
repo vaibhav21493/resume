@@ -153,8 +153,8 @@ st.markdown(
 )
 st.session_state.count = idx
 
-# --- WELCOME TEXT (STATIC TIME) ---
-current_time = datetime.now().strftime("%I:%M:%S %p")
+# --- WELCOME TEXT ---
+current_time = datetime.now().strftime("%I:%M %p")
 st.markdown(f"<div class='header-text'>Welcome, Vaibhav — {current_time}</div>", unsafe_allow_html=True)
 
 # --- PROFILE + CARD ---
@@ -170,6 +170,7 @@ st.markdown('<div class="subtitle">B.Tech in Cyber Physical Systems | MIT Manipa
 # --- Button instead of link ---
 if st.button("🚀 Explore My Portfolio"):
     st.session_state.show_portfolio = True
-    st.experimental_rerun()
+    st.rerun()
 
 st.markdown('</div>', unsafe_allow_html=True)
+
