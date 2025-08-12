@@ -153,10 +153,6 @@ st.markdown(
 )
 st.session_state.count = idx
 
-# --- WELCOME TEXT ---
-current_time = datetime.now().strftime("%I:%M %p")
-st.markdown(f"<div class='header-text'>Welcome, Vaibhav — {current_time}</div>", unsafe_allow_html=True)
-
 # --- PROFILE + CARD ---
 st.markdown('<div class="container">', unsafe_allow_html=True)
 
@@ -173,4 +169,5 @@ if st.button("🚀 Explore My Portfolio"):
     st.rerun()
 
 st.markdown('</div>', unsafe_allow_html=True)
+
 
